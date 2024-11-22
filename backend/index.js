@@ -24,7 +24,9 @@ app.use(express.json());
 
 // Serve static files from the 'uploads' directory
 app.use("/uploads", express.static("uploads")); // Uncommented line
-
+app.get("/", (req, res) => {
+  res.send("Welcome to the API!");
+});
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/product", productRoutes);

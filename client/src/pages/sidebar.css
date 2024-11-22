@@ -1,0 +1,12 @@
+.upload-image {
+  width: 150px;
+  /* Adjust the size as per your preference */
+  height: 150px;
+  /* This will ensure the image doesn't become too large */
+  object-fit: cover;
+  /* This makes sure the image covers the area proportionally */
+  border-radius: 8px;
+  /* Optional: for rounded corners */
+  border: 2px solid #ccc;
+  /* Optional: to add a subtle border */
+}

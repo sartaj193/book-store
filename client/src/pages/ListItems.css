@@ -1,0 +1,133 @@
+/*.container {
+  margin-top: 40px;
+}
+
+.product-card {
+  border: 1px solid #e0e0e0;
+  padding: 15px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.no-image-placeholder {
+  width: 100%;
+  height: 200px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.product-details {
+  padding-left: 20px;
+}
+
+.product-details p {
+  margin: 10px 0;
+}
+
+.btn-primary {
+  margin-top: 15px;
+}*/
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Field names (Image, Name, Orders, etc.) above each product */
+.table-header {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  /* Match product grid layout */
+  grid-gap: 20px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  /* 5 columns for larger screens */
+  grid-gap: 20px;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+}
+
+.product-image {
+  max-width: 150px;
+  /* Larger image size */
+  height: auto;
+  object-fit: cover;
+}
+
+.product-row .col-md-2,
+.product-row .col-md-3,
+.product-row .col-md-1 {
+  text-align: center;
+}
+
+/* Responsive design for tablet */
+@media (max-width: 768px) {
+  .table-header {
+    grid-template-columns: repeat(3, 1fr);
+    /* Adjust for smaller screens */
+  }
+
+  .product-row {
+    grid-template-columns: repeat(3, 1fr);
+    /* Adjust grid columns */
+  }
+
+  .product-image {
+    max-width: 120px;
+    /* Smaller image for tablets */
+  }
+}
+
+/* Responsive design for mobile */
+@media (max-width: 576px) {
+  .table-header {
+    grid-template-columns: 1fr 1fr;
+    /* Adjust header for mobile */
+  }
+
+  .product-row {
+    grid-template-columns: 1fr 1fr;
+    /* 2-column layout for mobile */
+    grid-gap: 15px;
+  }
+
+  .product-image {
+    max-width: 100px;
+    /* Smaller image for mobile */
+  }
+
+  .product-row .col-md-2,
+  .product-row .col-md-3,
+  .product-row .col-md-1 {
+    grid-column: span 2;
+    /* Span full width for mobile */
+  }
+
+  .product-row {
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+/* Action button */
+.product-row .btn-danger {
+  font-size: 14px;
+  padding: 5px 10px;
+}

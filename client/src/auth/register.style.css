@@ -1,0 +1,111 @@
+/* Styles specific to the Register Form */
+.register {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  /* Grey background */
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  /* Dark text color for readability */
+}
+
+.register h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  /* Dark heading for contrast on grey background */
+}
+
+/* Make input fields look like lines */
+.register input.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 0;
+  margin-bottom: 1.5rem;
+  border: none;
+  border-bottom: 2px solid #333;
+  /* Dark line style on grey background */
+  font-size: 1rem;
+  background-color: transparent;
+  /* Remove background */
+  color: #ffffff;
+  /* Bright white text inside input fields */
+}
+
+.register input.form-control:focus {
+  border-bottom-color: #007bff;
+  /* Change color on focus */
+  outline: none;
+  box-shadow: none;
+}
+
+/* Placeholder styling */
+.register input::placeholder {
+  font-style: italic;
+  color: #999;
+}
+
+/* Checkbox styling */
+.register input[type="checkbox"] {
+  margin-left: 0.25rem;
+}
+
+.register .form-check {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.register .form-check-label {
+  margin-left: 0.5rem;
+  color: #333;
+  /* Dark text for the checkbox label */
+}
+
+/* Submit button styles with a flat silver design */
+.register button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background-color: silver;
+  /* Default silver color */
+  color: black;
+  /* Black text on silver button */
+  border: none;
+  /* Flat design with no border */
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect to change color */
+.register button[type="submit"]:hover {
+  background-color: #333;
+  /* Dark grey background on hover */
+  color: white;
+  /* White text on hover */
+}
+
+.register button[type="submit"]::before {
+  content: "Register";
+  /* Button text is "Register" */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .register {
+    padding: 1.5rem;
+  }
+
+  .register button[type="submit"] {
+    font-size: 0.875rem;
+  }
+
+  .register input.form-control {
+    font-size: 0.875rem;
+  }
+}

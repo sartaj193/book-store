@@ -1,0 +1,21 @@
+/* Grid layout */
+.Lone {
+  display: grid;
+  gap: 20px;
+  /* Adjust as needed for spacing between items */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+@media (min-width: 600px) {
+  .Lone {
+    grid-template-columns: repeat(2, 1fr);
+    /* Two items per row for small screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .Lone {
+    grid-template-columns: repeat(4, 1fr);
+    /* Four items per row for larger screens */
+  }
+}

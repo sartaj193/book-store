@@ -1,0 +1,60 @@
+/* Reset margins and paddings for body and html */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  /* Prevent horizontal overflow */
+}
+
+/* Carousel Container */
+.carousel {
+  margin-top: 0;
+  /* Remove any margin for full-width */
+  width: 100%;
+}
+
+/* Carousel Inner */
+.carousel-inner {
+  width: 100%;
+}
+
+/* Images inside the carousel */
+.carousel-item img {
+  width: 100%;
+  /* Ensure the image takes full width of the container */
+  height: auto;
+  /* Maintain aspect ratio */
+  max-height: 600px;
+  /* Set a maximum height to prevent images from getting too large */
+  object-fit: cover;
+  /* Ensure the image covers the area */
+  object-position: center;
+  /* Center the image */
+  display: block;
+  /* Block display to remove extra space */
+}
+
+/* Hide carousel controls */
+.carousel-control-prev,
+.carousel-control-next {
+  display: none;
+  /* Hide control buttons */
+}
+
+/* Media query for smaller devices */
+@media (max-width: 768px) {
+  .carousel-item img {
+    max-height: 400px;
+    /* Limit height for smaller screens */
+  }
+}
+
+/* Media query for larger devices */
+@media (min-width: 768px) {
+  .carousel-item img {
+    max-height: 600px;
+    /* Set a max height for larger screens */
+  }
+}

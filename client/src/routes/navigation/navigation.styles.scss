@@ -1,0 +1,170 @@
+/*.navigation {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+
+  .logo-container {
+    height: 100%;
+    width: 70px;
+    padding: 25px;
+  }
+
+  .nav-links-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .nav-link {
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+  }
+}*/
+
+
+      
+                                 .navigation {
+                                   display: flex;
+                                   justify-content: space-between;
+                                   align-items: center;
+                                   padding: 10px;
+                                   position: relative;
+                
+                                   .logo-container {
+                                     display: flex;
+                                     justify-content: center;
+                                     flex: 1;
+                                     position: absolute;
+                                     /* To ensure correct positioning */
+                                     left: 0;
+                                     /* Aligns logo to the left for larger screens */
+                                   }
+                
+                                   .logo {
+                                     font-size: 24px;
+                                     font-weight: bold;
+                                     margin-left: 20px;
+                                     /* Add margin to ensure spacing from left edge */
+                                   }
+                
+                                   /* Hamburger icon */
+                                   .hamburger {
+                                     background: none;
+                                     border: none;
+                                     cursor: pointer;
+                                     display: none;
+                                     /* Hidden on larger screens */
+                                     flex-direction: column;
+                                     gap: 5px;
+                                     z-index: 1001;
+                
+                                     .line {
+                                       width: 25px;
+                                       height: 3px;
+                                       background-color: black;
+                                     }
+                                   }
+                
+                                   /* Navigation Drawer */
+                                   .nav-links-container {
+                                     position: fixed;
+                                     top: 0;
+                                     left: -100%;
+                                     /* Initially hidden off-screen for smaller screens */
+                                     height: 100%;
+                                     width: 300px;
+                                     /* Menu width */
+                                     background-color: white;
+                                     display: flex;
+                                     flex-direction: column;
+                                     padding-top: 60px;
+                                     transition: all 0.3s ease;
+                                     z-index: 1000;
+                                   }
+                
+                                   /* Show the menu when open and change background color */
+                                   .nav-links-container.open {
+                                     left: 0;
+                                     background-color: #007bff;
+                                     /* Blue background when open */
+                                     width: 350px;
+                                     /* Slightly wider when opened */
+                                   }
+                
+                                   .nav-link {
+                                     padding: 15px 20px;
+                                     text-decoration: none;
+                                     color: white;
+                                     /* Adjust text color for blue background */
+                                     font-size: 18px;
+                                     border-bottom: 1px solid #ccc;
+                                     transition: background-color 0.2s;
+                
+                                     &:hover {
+                                       background-color: rgba(255, 255, 255, 0.2);
+                                     }
+                                   }
+                
+                                   /* Responsive design for smaller screens */
+                                   @media (max-width: 768px) {
+                                     .hamburger {
+                                       display: flex;
+                                       /* Show the hamburger icon on small screens */
+                                     }
+                
+                                     .logo-container {
+                                       left: 50%;
+                                       /* Centers the logo */
+                                       transform: translateX(-50%);
+                                     }
+                
+                                     .nav-links-container {
+                                       left: -100%;
+                                       /* Keep it hidden by default */
+                                     }
+                                   }
+                
+                                   /* For larger screens, keep the navigation inline and adjust logo */
+                                   @media (min-width: 769px) {
+                                     .hamburger {
+                                       display: none;
+                                       /* Hide the hamburger on large screens */
+                                     }
+                
+                                     .nav-links-container {
+                                       position: static;
+                                       display: flex;
+                                       gap: 20px;
+                                       flex-direction: row;
+                                       height: auto;
+                                       width: auto;
+                                       padding: 0;
+                                       background-color: transparent;
+                                       /* No background color on large screens */
+                                     }
+                
+                                     .nav-link {
+                                       color: black;
+                                       /* Text color for larger screens */
+                                       border: none;
+                                       padding: 5px 10px;
+                                     }
+                
+                                     .logo-container {
+                                       position: relative;
+                                       /* Reset positioning */
+                                       left: 0;
+                                       transform: none;
+                                       /* Remove centering */
+                                     }
+                
+                                     .logo {
+                                       margin-left: 0;
+                                       /* No extra left margin for larger screens */
+                                     }
+                                   }
+                                 }

@@ -41,5 +41,5 @@ router.post("/add", upload.array("images", 4), addProduct); // Use upload.array 
 router.get("/section/:section", getProductsBySection); // Get products by specific section
 router.delete("/:id", deleteProduct); // Delete product by ID
 router.put("/:id", updateProduct);
-router.delete("/remove/:id/:bookId", removeCartItem);
+//router.delete("/remove/:id/:bookId", removeCartItem);
 export default router;

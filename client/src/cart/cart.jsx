@@ -201,6 +201,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import { baseUrl } from '../utils/config';
 const CartD = ({ guestId }) => {
   const [cart, setCart] = useState({ items: [], totalAmount: 0 });
   const navigate = useNavigate();
@@ -208,7 +209,7 @@ const CartD = ({ guestId }) => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/cart/${guestId}`);
+        const response = await axios.get(`${baseUrl}/api/cart/${guestId}`);
         setCart(response.data);
       } catch (error) {
         console.error('Error fetching cart:', error);
@@ -220,7 +221,7 @@ const CartD = ({ guestId }) => {
   const updateQuantity = async (bookId, change) => {
     try {
       const payload = { bookId, quantityChange: change };
-      const response = await axios.put(`http://localhost:3001/api/cart/update/${guestId}`, payload);
+      const response = await axios.put(`${baseUrl}/api/cart/update/${guestId}`, payload);
       setCart(response.data);
     } catch (error) {
       console.error('Error updating cart:', error);
@@ -232,7 +233,7 @@ const CartD = ({ guestId }) => {
   console.log("Removing item with ID:", id, "and Book ID:", bookId); // Debugging
 
   try {
-    const response = await axios.delete(`http://localhost:3001/api/cart/remove/${id}/${bookId}`);
+    const response = await axios.delete(`${baseUrl}//api/cart/remove/${id}/${bookId}`);
     setCart(response.data); // Update cart state after removing the item
   } catch (error) {
     console.error("Error removing item:", error);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { baseUrl } from "../utils/config";
 const CheckoutPageO = ({ cartItems, user, guestId }) => {
   const [userDetails, setUserDetails] = useState({
     firstName: "",
@@ -26,7 +27,7 @@ const CheckoutPageO = ({ cartItems, user, guestId }) => {
   const mergeCart = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/cart/merge",
+        `${baseUrl}/api/cart/merge`,
         { guestId, userId: user.id },
         {
           headers: { Authorization: `Bearer ${user.token}` },

@@ -411,6 +411,7 @@ import React from 'react';
 import { ShoppingCart } from 'lucide-react';
 import axios from 'axios';
 
+import { baseUrl } from '../utils/config';
 const ProductCard = ({ book, guestId, styles }) => {
   // Add to Cart functionality
   const handleAddToCart = async () => {
@@ -422,7 +423,7 @@ const ProductCard = ({ book, guestId, styles }) => {
         image: book.images?.[0] || "https://via.placeholder.com/300x400.png?text=No+Image",
         price: book.price,
       };
-      await axios.post('http://localhost:3001/api/cart/add', payload);
+      await axios.post(`${baseUrl}/api/cart/add`, payload);
       alert(`${book.name} added to cart!`);
     } catch (error) {
       console.error('Error adding to cart:', error);
@@ -434,7 +435,7 @@ const ProductCard = ({ book, guestId, styles }) => {
   const imageUrl = book.images && book.images.length > 0
     ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
       ? book.images[0]
-      : `http://localhost:3001/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+      : `${baseUrl}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
     : "https://via.placeholder.com/300x400.png?text=No+Image";
 
   return (

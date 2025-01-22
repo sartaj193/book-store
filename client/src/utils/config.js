@@ -1,8 +1,8 @@
 // src/utils/config.js
 //export const baseUrl = `https://books-shopping-2.onrender.com`;
 
-export const Server_URL = "http://localhost:3000/";
-//export const Server_URL = process.env.REACT_APP_API_URL;
+//export const Server_URL = "http://localhost:3000/";
+export const Server_URL = process.env.REACT_APP_API_URL;
 
 // Local server URL
 

@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "server": "nodemon index.js",
-    "client": "npm start --prefix ../client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "node index.js",  // Start the backend server
+    "server": "nodemon index.js",  // Run the server with nodemon (useful for development)
+    "client": "npm start --prefix client",  // Start the React client in development mode
+    "client:build": "npm run build --prefix client",  // Build the React client for production
+    "dev": "concurrently \"npm run server\" \"npm run client\""  // Run both server and client in development mode
   },
   "keywords": [],
   "author": "",

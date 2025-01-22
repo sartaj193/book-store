@@ -50,7 +50,7 @@ border-bottom: 1px  solid black;
 @tailwind utilities;
 
 /* Custom Styles */
-body {
+/*body {
   margin: 0;
   padding: 20px 40px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -89,4 +89,51 @@ a {
   justify-content: center;
   height: 70vh;
   flex-direction: column;
-}
+}*/
+
+
+ /* Reset Styles */
+ body {
+   margin: 0;
+   padding: 0;
+   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+ }
+
+ code {
+   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+ }
+
+ /* Anchor Styles */
+ a {
+   text-decoration: none;
+   color: inherit;
+ }
+
+ .link {
+   color: pink;
+   border-bottom: 1px solid black;
+ }
+
+ /* Utility Classes */
+ * {
+   box-sizing: border-box;
+ }
+
+ /* Navigation */
+ .navigation {
+   line-height: 26px;
+   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+   border-bottom: 1px solid gray;
+ }
+
+ /* Register Section */
+ .register {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   min-height: 70vh;
+ }

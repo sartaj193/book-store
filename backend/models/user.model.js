@@ -45,11 +45,6 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: [true, "Name is required"],
-      trim: true,
-    },
     email: {
       type: String,
       required: [true, "Email is required"],
@@ -57,20 +52,8 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, "Password is required"],
-      minlength: [6, "Password must be at least 6 characters"],
-    },
-    phone: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
-    role: {
-      type: Number,
-      default: 0,
+      required: [true, "password is required"],
+      trim: true,
     },
     cart: [
       {

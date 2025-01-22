@@ -1,8 +1,11 @@
 import express from "express";
+//import passport from "passport";
 import {
   registerController,
   loginController,
   adminLogin,
+  forgotPasswordController,
+  resetPasswordController,
   //testController,
   //forgotPasswordController,
 } from "../controllers/authController.js";
@@ -19,7 +22,10 @@ router.post("/register", registerController);
 router.post("/login", loginController);
 
 router.post("/admin", adminLogin);
+router.post("/forgot-password", forgotPasswordController);
 
+// Reset Password route
+router.post("/reset-password", resetPasswordController);
 //Forgot Password || POST
 //router.post("/forgot-password", forgotPasswordController);
 
@@ -36,3 +42,23 @@ router.post("/admin", adminLogin);
 //});
 
 export default router;
+
+/*import express from "express";
+import passport from "passport";
+import { googleAuthCallback } from "../controllers/authController.js";
+
+const router = express.Router();
+
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  googleAuthCallback
+);
+
+export default router;
+*/

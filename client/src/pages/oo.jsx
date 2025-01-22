@@ -407,7 +407,7 @@ const ProductCard = ({ book, guestId, styles }) => {
 export default ProductCard;
 */
 
-import React from 'react';
+/*import React from 'react';
 import { ShoppingCart } from 'lucide-react';
 import axios from 'axios';
 
@@ -475,5 +475,951 @@ const ProductCard = ({ book, guestId, styles }) => {
   );
 };
 
+export default ProductCard;*/
+
+/*import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import axios from 'axios';
+
+import { baseUrl } from '../utils/config';
+
+const ProductCard = ({ book, guestId }) => {
+  const handleAddToCart = async () => {
+    try {
+      const payload = {
+        guestId,
+        bookId: book._id,
+        title: book.name,
+        image: book.images?.[0] || "https://via.placeholder.com/300x400.png?text=No+Image",
+        price: book.price,
+      };
+      await axios.post(`${baseUrl}/api/cart/add`, payload);
+      alert(`${book.name} added to cart!`);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add to cart. Please try again.');
+    }
+  };
+
+  const imageUrl = book.images && book.images.length > 0
+    ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
+      ? book.images[0]
+      : `${baseUrl}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+    : "https://via.placeholder.com/300x400.png?text=No+Image";
+
+  return (
+    <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-200 hover:-translate-y-1">
+      <div className="relative pt-[133%]">
+        <img
+          src={imageUrl}
+          alt={book.name || 'Book Cover'}
+          className="absolute top-0 left-0 w-full h-full object-cover rounded-t-lg"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "https://via.placeholder.com/300x400.png?text=No+Image";
+          }}
+        />
+      </div>
+      <div className="p-4">
+        <h3 className="text-sm font-semibold text-gray-800 mb-1 truncate">{book.name || 'Untitled Book'}</h3>
+        <p className="text-xs text-gray-600 mb-2 truncate">{book.author || 'Unknown Author'}</p>
+        <p className="text-lg font-bold text-orange-500 mb-3">₹{book.price || 0}</p>
+        <button
+          className="w-full bg-orange-500 text-white py-2 px-4 rounded-md text-sm font-medium flex items-center justify-center hover:bg-orange-600 transition-colors duration-200"
+          onClick={handleAddToCart}
+        >
+          <ShoppingCart size={16} className="mr-2" />
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;*/
+
+/*import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import axios from 'axios';
+
+import { baseUrl } from '../utils/config';
+
+const ProductCard = ({ book, guestId, onAddToCart }) => {
+  const imageUrl = book.images && book.images.length > 0
+    ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
+      ? book.images[0]
+      : `${baseUrl}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+    : "https://via.placeholder.com/300x400.png?text=No+Image";
+
+  return (
+    <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl">
+      <div className="relative pt-[150%]">
+        <img
+          src={imageUrl}
+          alt={book.name || 'Book Cover'}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "https://via.placeholder.com/300x400.png?text=No+Image";
+          }}
+        />
+        <button
+          className="absolute top-2 left-2 bg-white p-2 rounded-full shadow-md"
+          onClick={onAddToCart}
+        >
+          <ShoppingCart size={20} className="text-orange-500" />
+        </button>
+      </div>
+      <div className="p-3">
+        <h3 className="text-sm font-semibold text-gray-800 mb-1 line-clamp-2">{book.name || 'Untitled Book'}</h3>
+        <p className="text-xs text-gray-600 mb-1">{book.author || 'Unknown Author'}</p>
+        <p className="text-lg font-bold text-orange-500">₹{book.price || 0}</p>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;*/
+
+
+/*import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import axios from 'axios';
+
+import { baseUrl } from '../utils/config';
+
+const ProductCard = ({ book, guestId, onAddToCart }) => {
+  const imageUrl = book.images && book.images.length > 0
+    ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
+      ? book.images[0]
+      : `${baseUrl}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+    : "https://via.placeholder.com/300x400.png?text=No+Image";
+
+  return (
+    <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl">
+      <div className="relative pt-[150%]">
+        <img
+          src={imageUrl}
+          alt={book.name || 'Book Cover'}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "https://via.placeholder.com/300x400.png?text=No+Image";
+          }}
+        />
+        <button
+          className="absolute top-2 left-2 bg-white p-2 rounded-full shadow-md"
+          onClick={onAddToCart}
+        >
+          <ShoppingCart size={20} className="text-orange-500" />
+        </button>
+      </div>
+      <div className="p-2">
+        <h3 className="text-sm font-semibold text-gray-800 mb-1 line-clamp-2">{book.name || 'Untitled Book'}</h3>
+        <p className="text-xs text-gray-600 mb-1">{book.author || 'Unknown Author'}</p>
+        <p className="text-lg font-bold text-orange-500">₹{book.price || 0}</p>
+      </div>
+    </div>
+  );
+};
+
 export default ProductCard;
+*/
+
+
+
+/*import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import { baseUrl } from '../utils/config';
+
+const ProductCard = ({ book, guestId, onAddToCart }) => {
+  const imageUrl = book.images && book.images.length > 0
+    ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
+      ? book.images[0]
+      : `${baseUrl}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+    : "https://via.placeholder.com/300x400.png?text=No+Image";
+
+  return (
+    <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl">
+      <div className="relative pt-[150%]">
+        <img
+          src={imageUrl}
+          alt={book.name || 'Book Cover'}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "https://via.placeholder.com/300x400.png?text=No+Image";
+          }}
+        />
+        <button
+          className="absolute top-2 left-2 bg-white p-2 rounded-full shadow-md"
+          onClick={onAddToCart}
+        >
+          <ShoppingCart size={20} className="text-orange-500" />
+        </button>
+      </div>
+      <div className="p-2">
+        <h3 className="text-sm font-semibold text-gray-800 mb-1 line-clamp-2">{book.name || 'Untitled Book'}</h3>
+        <p className="text-xs text-gray-600 mb-1">{book.author || 'Unknown Author'}</p>
+        <p className="text-lg font-bold text-orange-500">₹{book.price || 0}</p>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;*/
+
+/*import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import { baseUrl } from '../utils/config';
+
+const ProductCard = ({ book, guestId, onAddToCart }) => {
+  const imageUrl = book.images && book.images.length > 0
+    ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
+      ? book.images[0]
+      : `${baseUrl}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+    : "https://via.placeholder.com/300x400.png?text=No+Image";
+
+  return (
+    <div
+      style={{
+        backgroundColor: 'white',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        transition: 'all 0.3s ease-in-out',
+        width: '100%',
+      }}
+    >
+      <div style={{ position: 'relative', paddingTop: '150%' }}>
+        <img
+          src={imageUrl}
+          alt={book.name || 'Book Cover'}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "https://via.placeholder.com/300x400.png?text=No+Image";
+          }}
+        />
+        <button
+          style={{
+            position: 'absolute',
+            top: '8px',
+            left: '8px',
+            backgroundColor: 'white',
+            padding: '8px',
+            borderRadius: '50%',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+          }}
+          onClick={onAddToCart}
+        >
+          <ShoppingCart size={20} style={{ color: '#f97316' }} />
+        </button>
+      </div>
+      <div style={{ padding: '16px' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: '600', color: '#2d3748', marginBottom: '8px' }}>
+          {book.name || 'Untitled Book'}
+        </h3>
+        <p style={{ fontSize: '0.875rem', color: '#718096', marginBottom: '8px' }}>
+          {book.author || 'Unknown Author'}
+        </p>
+        <p style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#f97316' }}>
+          ₹{book.price || 0}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;*/
+//working
+
+/*import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import axios from 'axios';
+//import { baseUrl } from '../utils/config';
+import { Server_URL } from '../utils/config';
+const ProductCard = ({ book, guestId, userId }) => {
+  const imageUrl =
+    book.images && book.images.length > 0
+      ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
+        ? book.images[0]
+        : `${Server_URL}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+      : 'https://via.placeholder.com/300x400.png?text=No+Image';
+
+  const handleAddToCart = async () => {
+    try {
+      const cartData = {
+        guestId,
+        userId,
+        bookId: book._id,
+        title: book.name,
+        image: imageUrl,
+        price: book.price,
+      };
+      
+      const response = await axios.post(`${Server_URL}api/cart/add`, cartData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('Cart updated:', response.data);
+      alert('Item added to cart successfully!');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add item to cart.');
+    }
+  };
+
+  return (
+    <div
+      style={{
+        backgroundColor: 'white',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        transition: 'all 0.3s ease-in-out',
+        width: '100%',
+      }}
+    >
+      <div style={{ position: 'relative', paddingTop: '150%' }}>
+        <img
+          src={imageUrl}
+          alt={book.name || 'Book Cover'}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = 'https://via.placeholder.com/300x400.png?text=No+Image';
+          }}
+        />
+        <button
+          style={{
+            position: 'absolute',
+            top: '8px',
+            left: '8px',
+            backgroundColor: 'white',
+            padding: '8px',
+            borderRadius: '50%',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+          }}
+          onClick={handleAddToCart}
+        >
+          <ShoppingCart size={20} style={{ color: '#f97316' }} />
+        </button>
+      </div>
+      <div style={{ padding: '16px' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: '600', color: '#2d3748', marginBottom: '8px' }}>
+          {book.name || 'Untitled Book'}
+        </h3>
+        <p style={{ fontSize: '0.875rem', color: '#718096', marginBottom: '8px' }}>
+          {book.author || 'Unknown Author'}
+        </p>
+        <p style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#f97316' }}>
+          ₹{book.price || 0}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;*/
+
+//working
+/*import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import axios from 'axios';
+import { Server_URL } from '../utils/config';
+
+const ProductCard = ({ book, guestId, userId }) => {
+  const imageUrl =
+    book.images && book.images.length > 0
+      ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
+        ? book.images[0]
+        : `${Server_URL}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+      : 'https://via.placeholder.com/300x400.png?text=No+Image';
+
+  const handleAddToCart = async () => {
+    try {
+      const cartData = {
+        guestId,
+        userId,
+        bookId: book._id,
+        title: book.name,
+        image: imageUrl,
+        price: book.price,
+      };
+      
+      const response = await axios.post(`${Server_URL}api/cart/add`, cartData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('Cart updated:', response.data);
+      alert('Item added to cart successfully!');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add item to cart.');
+    }
+  };
+
+  return (
+    <div style={{
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      padding: '8px',
+      boxSizing: 'border-box',
+    }}>
+      <div style={{
+        width: '100%',
+        paddingBottom: '150%',
+        position: 'relative',
+        marginBottom: '8px',
+      }}>
+        <img
+          src={imageUrl}
+          alt={book.name || 'Book Cover'}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = 'https://via.placeholder.com/300x400.png?text=No+Image';
+          }}
+        />
+      </div>
+      <h3 style={{
+        fontSize: '14px',
+        fontWeight: '500',
+        color: '#333',
+        marginBottom: '4px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        width: '100%',
+      }}>
+        {book.name || 'Untitled Book'}
+      </h3>
+      <p style={{
+        fontSize: '12px',
+        color: '#666',
+        marginBottom: '4px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        width: '100%',
+      }}>
+        {book.author || 'Unknown Author'}
+      </p>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+      }}>
+        <p style={{
+          fontSize: '16px',
+          fontWeight: 'bold',
+          color: '#f97316',
+        }}>
+          ₹{book.price || 0}
+        </p>
+        <button
+          style={{
+            backgroundColor: '#f97316',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            padding: '6px 12px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            fontSize: '12px',
+          }}
+          onClick={handleAddToCart}
+        >
+          <ShoppingCart size={16} style={{ marginRight: '4px' }} />
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;*/
+// working
+import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import axios from 'axios';
+import { Server_URL } from '../utils/config';
+
+const ProductCard = ({ book, guestId, userId }) => {
+  const imageUrl =
+    book.images && book.images.length > 0
+      ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
+        ? book.images[0]
+        : `${Server_URL}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+      : 'https://via.placeholder.com/300x400.png?text=No+Image';
+
+  const handleAddToCart = async () => {
+    try {
+      const cartData = {
+        guestId,
+        userId,
+        bookId: book._id,
+        title: book.name,
+        image: imageUrl,
+        price: book.price,
+      };
+      
+      const response = await axios.post(`${Server_URL}api/cart/add`, cartData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('Cart updated:', response.data);
+      alert('Item added to cart successfully!');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add item to cart.');
+    }
+  };
+
+  return (
+    <div style={{
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      padding: '8px',
+      boxSizing: 'border-box',
+    }}>
+      <div style={{
+        width: '100%',
+        paddingBottom: '150%',
+        position: 'relative',
+        marginBottom: '8px',
+        overflow: 'hidden',
+      }}>
+        <img
+          src={imageUrl}
+          alt={book.name || 'Book Cover'}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            transition: 'transform 0.3s ease-in-out',
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'scale(1.05)';
+            e.target.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.boxShadow = 'none';
+          }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = 'https://via.placeholder.com/300x400.png?text=No+Image';
+          }}
+        />
+      </div>
+      <h3 style={{
+        fontSize: '14px',
+        fontWeight: '500',
+        color: '#333',
+        marginBottom: '4px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        width: '100%',
+      }}>
+        {book.name || 'Untitled Book'}
+      </h3>
+      <p style={{
+        fontSize: '12px',
+        color: '#666',
+        marginBottom: '4px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        width: '100%',
+      }}>
+        {book.author || 'Unknown Author'}
+      </p>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+      }}>
+        <p style={{
+          fontSize: '16px',
+          fontWeight: 'bold',
+          color: '#f97316',
+        }}>
+          ₹{book.price || 0}
+        </p>
+        <button
+          style={{
+            backgroundColor: '#f97316',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            padding: '6px 12px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            fontSize: '12px',
+          }}
+          onClick={handleAddToCart}
+        >
+          <ShoppingCart size={16} style={{ marginRight: '4px' }} />
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;
+
+/*import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import { Server_URL } from '../utils/config';
+
+import { useCart } from '../finalApperence/Cartlogic';
+const ProductCard = ({ book }) => {
+  const { handleAddToCart } = useCart();
+
+  const imageUrl =
+    book.images && book.images.length > 0
+      ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
+        ? book.images[0]
+        : `${Server_URL}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+      : 'https://via.placeholder.com/300x400.png?text=No+Image';
+
+  const onAddToCart = async () => {
+    try {
+      await handleAddToCart(book);
+      alert('Item added to cart successfully!');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add item to cart.');
+    }
+  };
+
+  return (
+    <div style={{
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      padding: '8px',
+      boxSizing: 'border-box',
+    }}>
+      <div style={{
+        width: '100%',
+        paddingBottom: '150%',
+        position: 'relative',
+        marginBottom: '8px',
+        overflow: 'hidden',
+      }}>
+        <img
+          src={imageUrl}
+          alt={book.name || 'Book Cover'}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            transition: 'transform 0.3s ease-in-out',
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'scale(1.05)';
+            e.target.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.boxShadow = 'none';
+          }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = 'https://via.placeholder.com/300x400.png?text=No+Image';
+          }}
+        />
+      </div>
+      <h3 style={{
+        fontSize: '14px',
+        fontWeight: '500',
+        color: '#333',
+        marginBottom: '4px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        width: '100%',
+      }}>
+        {book.name || 'Untitled Book'}
+      </h3>
+      <p style={{
+        fontSize: '12px',
+        color: '#666',
+        marginBottom: '4px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        width: '100%',
+      }}>
+        {book.author || 'Unknown Author'}
+      </p>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+      }}>
+        <p style={{
+          fontSize: '16px',
+          fontWeight: 'bold',
+          color: '#f97316',
+        }}>
+          ₹{book.price || 0}
+        </p>
+        <button
+          style={{
+            backgroundColor: '#f97316',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            padding: '6px 12px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            fontSize: '12px',
+          }}
+          onClick={onAddToCart}
+        >
+          <ShoppingCart size={16} style={{ marginRight: '4px' }} />
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;*/
+
+
+
+
+
+
+
+/*import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+import axios from 'axios';
+import { Server_URL } from '../utils/config';
+
+const ProductCard = ({ book, guestId, userId }) => {
+  const imageUrl =
+    book.images && book.images.length > 0
+      ? book.images[0].startsWith('http') || book.images[0].includes('uploads/images')
+        ? book.images[0]
+        : `${Server_URL}/uploads/images/${book.images[0].replace(/^\/+/, '')}`
+      : 'https://via.placeholder.com/300x400.png?text=No+Image';
+
+  const handleAddToCart = async () => {
+    try {
+      const cartData = {
+        guestId,
+        userId,
+        bookId: book._id,
+        title: book.name,
+        image: imageUrl,
+        price: book.price,
+      };
+      
+      const response = await axios.post(`${Server_URL}api/cart/add`, cartData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('Cart updated:', response.data);
+      alert('Item added to cart successfully!');
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Failed to add item to cart.');
+    }
+  };
+
+  return (
+    <div style={{
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      padding: '8px',
+      boxSizing: 'border-box',
+      margin: '0',
+      backgroundColor: '#ffffff',
+    }}>
+      <div style={{
+        width: '100%',
+        paddingBottom: '130%',
+        position: 'relative',
+        marginBottom: '8px',
+      }}>
+        <img
+          src={imageUrl}
+          alt={book.name || 'Book Cover'}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = 'https://via.placeholder.com/300x400.png?text=No+Image';
+          }}
+        />
+      </div>
+      <h3 style={{
+        fontSize: '14px',
+        fontWeight: '500',
+        color: '#333',
+        marginBottom: '4px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        width: '100%',
+      }}>
+        {book.name || 'Untitled Book'}
+      </h3>
+      <p style={{
+        fontSize: '12px',
+        color: '#666',
+        marginBottom: '4px',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        width: '100%',
+      }}>
+        {book.author || 'Unknown Author'}
+      </p>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+      }}>
+        <p style={{
+          fontSize: '16px',
+          fontWeight: 'bold',
+          color: '#f97316',
+          margin: '0',
+        }}>
+          ₹{book.price || 0}
+        </p>
+        <button
+          style={{
+            backgroundColor: '#f97316',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            padding: '6px 8px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            fontSize: '12px',
+          }}
+          onClick={handleAddToCart}
+        >
+          <ShoppingCart size={14} style={{ marginRight: '4px' }} />
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;*/
+
+
+
+
+
+
+
+
+
+
+
+/*import React from 'react';
+import { ShoppingCart } from 'lucide-react';
+
+const ProductCard = ({ book, guestId, onAddToCart }) => {
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    onAddToCart(book);
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
+      <img
+        src={book.images?.[0] || "https://via.placeholder.com/300x400.png?text=No+Image"}
+        alt={book.name}
+        className="w-full h-48 object-cover"
+      />
+      <div className="p-4">
+        <h3 className="text-lg font-semibold mb-2 truncate">{book.name}</h3>
+        <p className="text-gray-600 mb-2 truncate">{book.author}</p>
+        <div className="flex justify-between items-center">
+          <span className="text-orange-500 font-bold">₹{book.price}</span>
+          <button
+            onClick={handleAddToCart}
+            className="bg-orange-500 text-white p-2 rounded-full hover:bg-orange-600 transition-colors duration-300"
+          >
+            <ShoppingCart size={20} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;*/
+
+
 

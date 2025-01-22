@@ -30,3 +30,19 @@ router.post(
 );
 
 export default router;*/
+import express from "express";
+import upload from "../middlewares/multer.js";
+import {
+  getAllCategories,
+  createCategory,
+  deleteCategory,
+  CategoryIO,
+  getCategorySections,
+} from "../controllers/categoryController.js";
+const router = express.Router();
+router.get("/te", getAllCategories);
+router.post("/createCategory", upload.single("image"), createCategory);
+router.delete("/deletit/:id", deleteCategory);
+router.put("/updateIt/:id", CategoryIO);
+router.get("/:id/sections", getCategorySections);
+export default router;

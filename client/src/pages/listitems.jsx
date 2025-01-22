@@ -944,7 +944,7 @@ const ListItems = () => {
 };
 
 export default ListItems;*/
-import React, { useState, useEffect } from "react";
+/*import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const ListItems = () => {
@@ -1059,6 +1059,8 @@ const ListItems = () => {
       console.error("Error updating product:", error);
     }
   };
+
+  
 
   // Handle Delete button click
   const handleDeleteClick = async (productId) => {
@@ -1188,3 +1190,446 @@ punjabi literature
 };
 
 export default ListItems;
+*/
+
+
+
+
+/*import React, { useState, useEffect } from "react"
+import axios from "axios"
+
+const ListItems = () => {
+  const [products, setProducts] = useState([])
+  const [selectedSection, setSelectedSection] = useState("popular in punjab")
+  const [editingProduct, setEditingProduct] = useState(null)
+  const [updatedProduct, setUpdatedProduct] = useState({
+    name: "",
+    author: "",
+    price: "",
+    section: "",
+    images: [],
+  })
+  const [files, setFiles] = useState([])
+
+  const fetchProductsBySection = async (section) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/api/product/section/${section}`)
+      if (response.data && response.data.length > 0) {
+        const filteredProducts = response.data.filter((product) => product.section.includes(section))
+        setProducts(filteredProducts)
+      } else {
+        setProducts([])
+      }
+    } catch (error) {
+      console.error(`Error fetching products for section ${section}:`, error)
+      setProducts([])
+    }
+  }
+
+  useEffect(() => {
+    fetchProductsBySection(selectedSection)
+  }, [selectedSection])
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setUpdatedProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: value,
+    }))
+  }
+
+  const handleImageChange = (e) => {
+    setFiles(Array.from(e.target.files))
+  }
+
+  const handleEditClick = (product) => {
+    setEditingProduct(product)
+    setUpdatedProduct({
+      name: product.name,
+      author: product.author,
+      price: product.price,
+      section: Array.isArray(product.section) ? product.section.join(", ") : product.section,
+      images: product.images,
+    })
+    setFiles([])
+  }
+
+   const handleSaveChanges = async () => {
+  try {
+    const formData = new FormData();
+    formData.append("name", updatedProduct.name || editingProduct.name);
+    formData.append("author", updatedProduct.author || editingProduct.author);
+    formData.append("price", updatedProduct.price || editingProduct.price);
+    formData.append("section", updatedProduct.section || editingProduct.section);
+
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append("images", files[i]);
+      }
+    }
+
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value); // Log each field in the FormData
+    }
+
+    const response = await axios.put(
+      `http://localhost:3001/api/product/${editingProduct._id}`,
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+
+    console.log("Update Response:", response.data);
+
+    const updatedProducts = products.map((product) =>
+      product._id === editingProduct._id
+        ? { ...product, ...updatedProduct, images: files.length > 0 ? [...files] : product.images }
+        : product
+    );
+    setProducts(updatedProducts);
+    setEditingProduct(null);
+    setFiles([]);
+  } catch (error) {
+    console.error("Error updating product:", error);
+  }
+};
+
+
+  const handleDeleteClick = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:3001/api/product/${productId}`)
+      setProducts((prevProducts) => prevProducts.filter((product) => product._id !== productId))
+    } catch (error) {
+      console.error("Error deleting product:", error)
+    }
+  }
+
+  return (
+    <div className="container mt-5">
+      <h2 className="text-center mb-4">Products in {selectedSection} Section</h2>
+
+      <div className="text-center mb-4">
+        <button onClick={() => setSelectedSection("popular in punjab")} className="btn btn-primary mx-2">
+          Popular in Punjab
+        </button>
+        <button onClick={() => setSelectedSection("punjabi literature")} className="btn btn-primary mx-2">
+          Punjabi Literature
+        </button>
+        <button onClick={() => setSelectedSection("punjabi culture")} className="btn btn-primary mx-2">
+          Punjabi Culture
+        </button>
+        <button onClick={() => setSelectedSection("best sellers")} className="btn btn-primary mx-2">
+          Best Sellers
+        </button>
+      </div>
+
+      {products.length > 0 ? (
+        <div className="table-responsive">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product._id}>
+                  <td>
+                    <img
+                      src={product.images[0] || "/placeholder.svg"}
+                      alt={product.name}
+                      style={{ width: "50px", height: "auto" }}
+                    />
+                  </td>
+                  <td>
+                    {editingProduct && editingProduct._id === product._id ? (
+                      <input type="text" name="name" value={updatedProduct.name} onChange={handleInputChange} />
+                    ) : (
+                      product.name
+                    )}
+                  </td>
+                  <td>
+                    {editingProduct && editingProduct._id === product._id ? (
+                      <input type="text" name="author" value={updatedProduct.author} onChange={handleInputChange} />
+                    ) : (
+                      product.author
+                    )}
+                  </td>
+                  <td>
+                    {editingProduct && editingProduct._id === product._id ? (
+                      <input type="number" name="price" value={updatedProduct.price} onChange={handleInputChange} />
+                    ) : (
+                      `₹${product.price}`
+                    )}
+                  </td>
+                  <td>
+                    {editingProduct && editingProduct._id === product._id ? (
+                      <>
+                        <input type="file" multiple accept="image/*" onChange={handleImageChange} />
+                        <button className="btn btn-success" onClick={handleSaveChanges}>
+                          Save
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button className="btn btn-warning mx-1" onClick={() => handleEditClick(product)}>
+                          Edit
+                        </button>
+                        <button className="btn btn-danger mx-1" onClick={() => handleDeleteClick(product._id)}>
+                          Delete
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p className="text-center">No products found for this section.</p>
+      )}
+    </div>
+  )
+}
+
+export default ListItems*/
+
+
+
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+
+const ListItems = () => {
+  const [products, setProducts] = useState([])
+  const [selectedSection, setSelectedSection] = useState("popular in punjab")
+  const [editingProduct, setEditingProduct] = useState(null)
+  const [updatedProduct, setUpdatedProduct] = useState({
+    name: "",
+    author: "",
+    price: "",
+    section: "",
+    images: [],
+  })
+  const [files, setFiles] = useState([])
+
+  const fetchProductsBySection = async (section) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/api/product/section/${section}`)
+      if (response.data && response.data.length > 0) {
+        const filteredProducts = response.data.filter((product) => product.section.includes(section))
+        setProducts(filteredProducts)
+      } else {
+        setProducts([])
+      }
+    } catch (error) {
+      console.error(`Error fetching products for section ${section}:`, error)
+      setProducts([])
+    }
+  }
+
+  useEffect(() => {
+    fetchProductsBySection(selectedSection)
+  }, [selectedSection])
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setUpdatedProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: value,
+    }))
+  }
+
+  const handleImageChange = (e) => {
+    setFiles(Array.from(e.target.files))
+  }
+
+  const handleEditClick = (product) => {
+    setEditingProduct(product)
+    setUpdatedProduct({
+      name: product.name,
+      author: product.author,
+      price: product.price,
+      section: Array.isArray(product.section) ? product.section.join(", ") : product.section,
+      images: product.images,
+    })
+    setFiles([])
+  }
+
+  const handleSaveChanges = async () => {
+    try {
+      const formData = new FormData()
+      formData.append("name", updatedProduct.name)
+      formData.append("author", updatedProduct.author)
+      formData.append("price", updatedProduct.price)
+      formData.append("section", updatedProduct.section)
+
+      if (files.length > 0) {
+        files.forEach((file) => formData.append("images", file))
+      }
+
+      const response = await axios.put(`http://localhost:3001/api/product/${editingProduct._id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+
+      console.log("Update Response:", response.data)
+
+      if (response.data && response.data.product) {
+        const updatedProductData = response.data.product
+        setProducts((prevProducts) =>
+          prevProducts.map((product) => (product._id === editingProduct._id ? updatedProductData : product)),
+        )
+        setEditingProduct(null)
+        setFiles([])
+        alert("Product updated successfully!")
+      } else {
+        throw new Error("Invalid response from server")
+      }
+    } catch (error) {
+      console.error("Error updating product:", error)
+      alert("Failed to update product. Please try again.")
+    }
+  }
+
+  const handleDeleteClick = async (productId) => {
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      try {
+        await axios.delete(`http://localhost:3001/api/product/${productId}`)
+        setProducts((prevProducts) => prevProducts.filter((product) => product._id !== productId))
+        alert("Product deleted successfully!")
+      } catch (error) {
+        console.error("Error deleting product:", error)
+        alert("Failed to delete product. Please try again.")
+      }
+    }
+  }
+
+  return (
+    <div className="container mt-5">
+      <h2 className="text-center mb-4">Products in {selectedSection} Section</h2>
+
+      <div className="text-center mb-4">
+        <button onClick={() => setSelectedSection("popular in punjab")} className="btn btn-primary mx-2">
+          Popular in Punjab
+        </button>
+        <button onClick={() => setSelectedSection("punjabi literature")} className="btn btn-primary mx-2">
+          Punjabi Literature
+        </button>
+        <button onClick={() => setSelectedSection("punjabi culture")} className="btn btn-primary mx-2">
+          Punjabi Culture
+        </button>
+        <button onClick={() => setSelectedSection("best sellers")} className="btn btn-primary mx-2">
+          Best Sellers
+        </button>
+      </div>
+
+      {products.length > 0 ? (
+        <div className="table-responsive">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product._id}>
+                  <td>
+                    <img
+                      src={product.images[0] || "/placeholder.svg"}
+                      alt={product.name}
+                      style={{ width: "50px", height: "auto" }}
+                    />
+                  </td>
+                  <td>
+                    {editingProduct && editingProduct._id === product._id ? (
+                      <input
+                        type="text"
+                        name="name"
+                        value={updatedProduct.name}
+                        onChange={handleInputChange}
+                        className="form-control"
+                      />
+                    ) : (
+                      product.name
+                    )}
+                  </td>
+                  <td>
+                    {editingProduct && editingProduct._id === product._id ? (
+                      <input
+                        type="text"
+                        name="author"
+                        value={updatedProduct.author}
+                        onChange={handleInputChange}
+                        className="form-control"
+                      />
+                    ) : (
+                      product.author
+                    )}
+                  </td>
+                  <td>
+                    {editingProduct && editingProduct._id === product._id ? (
+                      <input
+                        type="number"
+                        name="price"
+                        value={updatedProduct.price}
+                        onChange={handleInputChange}
+                        className="form-control"
+                      />
+                    ) : (
+                      `₹${product.price}`
+                    )}
+                  </td>
+                  <td>
+                    {editingProduct && editingProduct._id === product._id ? (
+                      <>
+                        <input
+                          type="file"
+                          multiple
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          className="form-control mb-2"
+                        />
+                        <button className="btn btn-success mr-2" onClick={handleSaveChanges}>
+                          Save
+                        </button>
+                        <button className="btn btn-secondary" onClick={() => setEditingProduct(null)}>
+                          Cancel
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button className="btn btn-warning mr-2" onClick={() => handleEditClick(product)}>
+                          Edit
+                        </button>
+                        <button className="btn btn-danger" onClick={() => handleDeleteClick(product._id)}>
+                          Delete
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p className="text-center">No products found for this section.</p>
+      )}
+    </div>
+  )
+}
+
+export default ListItems
+
+
+

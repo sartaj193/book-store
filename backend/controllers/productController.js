@@ -479,7 +479,7 @@ export { addProduct, getProductsBySection };*/
 };*/
 // Ensure you import your product model
 
-export const addProduct = async (req, res) => {
+/*export const addProduct = async (req, res) => {
   try {
     // Extract form data from the request body
     const { name, author, price, section } = req.body;
@@ -546,6 +546,74 @@ export const addProduct = async (req, res) => {
     res
       .status(500)
       .json({ message: "Internal server error", error: error.message });
+  }
+};*/
+
+export const addProduct = async (req, res) => {
+  try {
+    const { name, author, price, section } = req.body;
+
+    // Validate and extract image file paths
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ message: "No images uploaded" });
+    }
+    const images = req.files.map((file) => `/uploads/images/${file.filename}`);
+
+    // Ensure `section` is an array
+    let sections = Array.isArray(section)
+      ? section
+      : section.split(",").map((s) => s.trim().toLowerCase());
+
+    const validSections = [
+      "popular in punjab",
+      "punjabi literature",
+      "punjabi culture",
+      "best sellers",
+    ];
+
+    const invalidSections = sections.filter((s) => !validSections.includes(s));
+    if (invalidSections.length > 0) {
+      return res.status(400).json({
+        message: `Invalid sections: ${invalidSections.join(
+          ", "
+        )}. Allowed sections: ${validSections.join(", ")}.`,
+      });
+    }
+
+    // Check for duplicate product name
+    const existingProduct = await productModel.findOne({ name });
+    if (existingProduct) {
+      return res
+        .status(409)
+        .json({ message: `Product with name "${name}" already exists.` });
+    }
+
+    const product = new productModel({
+      name: typeof name === "string" ? name.trim() : "",
+      author: typeof author === "string" ? author.trim() : "",
+      price: parseFloat(price),
+      section: sections,
+      images: images,
+    });
+
+    await product.save();
+    res.status(201).json({
+      message: "Product added successfully!",
+      product,
+    });
+  } catch (error) {
+    console.error("Error adding product:", error);
+    if (error.code === 11000) {
+      res.status(409).json({
+        message: "Duplicate product name",
+        error: error.message,
+      });
+    } else {
+      res.status(500).json({
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
   }
 };
 
@@ -802,7 +870,7 @@ export const deleteProduct = async (req, res) => {
 };
 */
 
-export const updateProduct = async (req, res) => {
+/*export const updateProduct = async (req, res) => {
   try {
     const { name, author, price, section } = req.body;
     const productId = req.params.id;
@@ -833,6 +901,51 @@ export const updateProduct = async (req, res) => {
     await product.save();
 
     res.status(200).json({ message: "Product updated successfully", product });
+  } catch (error) {
+    console.error("Error updating product:", error);
+    res
+      .status(500)
+      .json({ message: "Error updating product", error: error.message });
+  }
+};
+*/
+
+export const updateProduct = async (req, res) => {
+  try {
+    console.log("Request Body:", req.body);
+    console.log("Request Files:", req.files);
+
+    const { name, author, price, section } = req.body;
+    const productId = req.params.id;
+
+    // Retrieve the product by ID
+    const product = await productModel.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    console.log("Existing Product:", product);
+
+    // Update product details
+    product.name = name || product.name;
+    product.author = author || product.author;
+    product.price = price || product.price;
+    product.section = section || product.section;
+
+    // Handle images
+    if (req.files && req.files.length > 0) {
+      const uploadedImages = req.files.map((file) => file.path);
+      product.images = uploadedImages; // Replace images
+    }
+
+    // Save updated product
+    const updatedProduct = await product.save();
+    console.log("Updated Product:", updatedProduct);
+
+    res.status(200).json({
+      message: "Product updated successfully",
+      product: updatedProduct,
+    });
   } catch (error) {
     console.error("Error updating product:", error);
     res

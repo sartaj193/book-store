@@ -58,7 +58,7 @@ const SideBar = () => {
           </li>
           <li>
             <Link
-              to="orders"
+            to="orderios"
               className={`nav-link link-body-emphasis ${
                 isCollapsed ? "text-center" : ""
               }`}
@@ -76,6 +76,121 @@ const SideBar = () => {
               title={isCollapsed ? "List Items" : ""}
             >
               {isCollapsed ? "📃" : "List Items"}
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="add-product"
+              className={`nav-link link-body-emphasis ${
+                isCollapsed ? "text-center" : ""
+              }`}
+              title={isCollapsed ? "List Items" : ""}
+            >
+              {isCollapsed ? "📃" : "List Items"}
+            </Link>
+            
+          </li>
+          <li>
+            <Link
+              to="add"
+              className={`nav-link link-body-emphasis ${
+                isCollapsed ? "text-center" : ""
+              }`}
+              title={isCollapsed ? "List Items" : ""}
+            >
+              {isCollapsed ? "" : "List Items"}
+            </Link>
+            
+          </li>
+          <li>
+            <Link
+              to="view"
+              className={`nav-link link-body-emphasis ${
+                isCollapsed ? "text-center" : ""
+              }`}
+              title={isCollapsed ? "View Category" : ""}
+            >
+              {isCollapsed ? "" : "view category"}
+            </Link>
+            
+          </li>
+          <li>
+            <Link
+              to="createsection"
+              className={`nav-link link-body-emphasis ${
+                isCollapsed ? "text-center" : ""
+              }`}
+              title={isCollapsed ? "create section" : ""}
+            >
+              {isCollapsed ? "" : "create section"}
+            </Link>
+            
+          </li>
+          <li>
+            <Link
+              to="addBookform"
+              className={`nav-link link-body-emphasis ${
+                isCollapsed ? "text-center" : ""
+              }`}
+              title={isCollapsed ? "create book" : ""}
+            >
+              {isCollapsed ? "" : "create book"}
+            </Link>
+            
+          </li>
+           <li>
+            <Link
+              to="booklist"
+              className={`nav-link link-body-emphasis ${
+                isCollapsed ? "text-center" : ""
+              }`}
+              title={isCollapsed ? "show book" : ""}
+            >
+              {isCollapsed ? "" : "show book"}
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="addAuthor"
+              className={`nav-link link-body-emphasis ${
+                isCollapsed ? "text-center" : ""
+              }`}
+              title={isCollapsed ? "add Author" : ""}
+            >
+              {isCollapsed ? "" : "add Author"}
+            </Link>
+          </li>
+<li>
+            <Link
+              to="Authorid"
+              className={`nav-link link-body-emphasis ${
+                isCollapsed ? "text-center" : ""
+              }`}
+              title={isCollapsed ? "View Author" : ""}
+            >
+              {isCollapsed ? "" : "view Author"}
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="CreateAuthorSection"
+              className={`nav-link link-body-emphasis ${
+                isCollapsed ? "text-center" : ""
+              }`}
+              title={isCollapsed ? "Create AuthorSection" : ""}
+            >
+              {isCollapsed ? "" : "Craete AuthorSection"}
+            </Link>
+          </li>
+<li>
+            <Link
+              to="authorbook"
+              className={`nav-link link-body-emphasis ${
+                isCollapsed ? "text-center" : ""
+              }`}
+              title={isCollapsed ? "Author book" : ""}
+            >
+              {isCollapsed ? "" : "Authopr book "}
             </Link>
           </li>
         </ul>

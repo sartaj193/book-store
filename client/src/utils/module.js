@@ -61,3 +61,52 @@ utilityFunctions.parseJwt = (token) => {
 };
 
 export { utilityFunctions };
+
+/*const utilityFunctions = {
+  setCookie: (cookieName, cookieValue, expirationHours, secure = true) => {
+    const d = new Date();
+    d.setTime(d.getTime() + expirationHours * 60 * 60 * 1000);
+    const expires = "expires=" + d.toUTCString();
+    const secureFlag = secure ? "; Secure" : "";
+    document.cookie = `${cookieName}=${cookieValue}; ${expires}; path=/; SameSite=Strict${secureFlag}`;
+  },
+
+  checkCookieExists: (cookieName) => {
+    return document.cookie
+      .split(";")
+      .some((cookie) => cookie.trim().startsWith(`${cookieName}=`));
+  },
+
+  getCookieValue: (cookieName) => {
+    const cookies = document.cookie.split(";").map((cookie) => cookie.trim());
+    const foundCookie = cookies.find((cookie) =>
+      cookie.startsWith(`${cookieName}=`)
+    );
+    return foundCookie ? foundCookie.split("=")[1] : null;
+  },
+
+  removeCookie: (cookieName) => {
+    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=Strict`;
+  },
+
+  parseJwt: (token) => {
+    try {
+      if (!token || token.split(".").length !== 3) {
+        throw new Error("Invalid JWT format.");
+      }
+      const base64Url = token.split(".")[1];
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = atob(base64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("");
+      return JSON.parse(decodeURIComponent(jsonPayload));
+    } catch (error) {
+      console.error("Failed to parse JWT token:", error);
+      return null;
+    }
+  },
+};
+
+export { utilityFunctions };
+*/

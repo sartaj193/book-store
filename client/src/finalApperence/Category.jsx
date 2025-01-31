@@ -192,7 +192,7 @@ const Categories = () => {
             >
               <div className="w-20 h-20 rounded-full mb-4 bg-gray-100 overflow-hidden">
                 <img
-                  src={category.image}
+                    src={`${process.env.REACT_APP_API_URL}${category.image}`}
                   alt={category.name}
                   className="w-full h-full object-cover"
                 />

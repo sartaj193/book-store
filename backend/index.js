@@ -61,7 +61,7 @@ app.use(express.static(path.join(_dirname, "../client/build")));
 
 // Catch-all route to serve the React app
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(_dirname, "client/build", "index.html"));
+  res.sendFile(path.resolve(_dirname, "../client/build", "index.html"));
 });
 
 // Start the server

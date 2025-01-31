@@ -57,7 +57,7 @@ app.use("/api/bookdemand", bookdemand);
 app.use("/api/authorsection", authorSection);
 
 // Serve the React build folder
-app.use(express.static(path.join(_dirname, "client/build")));
+app.use(express.static(path.join(_dirname, "../client/build")));
 
 // Catch-all route to serve the React app
 app.get("*", (req, res) => {
